@@ -1,7 +1,8 @@
-# A1 · AAA con RADIUS (Cisco + Windows Server NPS / Active Directory)
+Gregorys Morel Duluc - Matricula 2025-0035 - Practica A1: AAA con RADIUS
 
-> ▶️ **Video de la demostración:** _(pendiente: pegar aquí el enlace de YouTube)_
-
+Repositorio GitHub: https://github.com/gregomorel79-dev/A1-AAA-RADIUS-2025-0035
+Video YouTube: https://youtu.be/BwiUiJGE4lA
+ 
 **Estudiante:** Gregorys Morel Duluc · **Matrícula:** 2025-0035 · **Materia:** Seguridad de Redes · **ITLA**
 
 ---
