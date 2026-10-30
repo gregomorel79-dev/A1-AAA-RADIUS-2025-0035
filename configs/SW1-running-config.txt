@@ -1,0 +1,95 @@
+Building configuration...
+
+Current configuration : 3908 bytes
+!
+! Last configuration change at 10:31:10 UTC Thu Oct 29 2026 by admin
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname SW1
+!
+boot-start-marker
+boot-end-marker
+!
+logging buffered 16384 informational
+username admin privilege 15 secret 5 $1$UuYA$ZYQNgL6SoMOUjjfiDVhs7/
+!
+aaa new-model
+!
+aaa group server radius NPS-GRP
+ server name NPS
+!
+aaa authentication login CON-AUTH group NPS-GRP local
+aaa authentication login VTY-LOCAL local
+aaa authorization console
+aaa authorization exec CON-AUTHZ group NPS-GRP local
+aaa authorization exec VTY-AUTHZ local
+aaa accounting exec CON-ACCT start-stop group NPS-GRP
+aaa accounting system default start-stop group NPS-GRP
+!
+aaa session-id common
+!
+no ip domain-lookup
+ip domain-name lab20250035.local
+ip cef
+login on-failure log
+login on-success log
+no ipv6 cef
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+interface GigabitEthernet0/0
+ negotiation auto
+interface GigabitEthernet0/1
+ negotiation auto
+interface GigabitEthernet0/2
+ negotiation auto
+interface GigabitEthernet0/3
+ negotiation auto
+interface GigabitEthernet1/0
+ negotiation auto
+interface GigabitEthernet1/1
+ negotiation auto
+interface GigabitEthernet1/2
+ negotiation auto
+interface GigabitEthernet1/3
+ negotiation auto
+interface Vlan1
+ ip address 10.20.35.2 255.255.255.240
+!
+ip default-gateway 10.20.35.1
+ip forward-protocol nd
+ip http server
+ip http secure-server
+ip ssh time-out 60
+ip ssh version 2
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+radius server NPS
+ address ipv4 10.20.35.3 auth-port 1812 acct-port 1813
+ key Radius2025Lab
+!
+control-plane
+!
+(banners exec/incoming/login: aviso de licencia de IOSv, omitidos por brevedad)
+!
+line con 0
+ authorization exec CON-AUTHZ
+ accounting exec CON-ACCT
+ login authentication CON-AUTH
+line aux 0
+ authorization exec CON-AUTHZ
+ accounting exec CON-ACCT
+ login authentication CON-AUTH
+line vty 0 4
+ authorization exec VTY-AUTHZ
+ login authentication VTY-LOCAL
+ transport input ssh
+!
+end
